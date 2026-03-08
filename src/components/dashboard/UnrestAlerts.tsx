@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
-import { unrestAlerts } from "@/lib/dashboardData";
+import { UnrestAlert } from "@/lib/dashboardData";
 import { AlertTriangle, Clock, ChevronRight, Shield } from "lucide-react";
 
-export const UnrestAlerts = () => {
-  const highPriorityCount = unrestAlerts.filter(a => a.probability > 50).length;
+interface UnrestAlertsProps {
+  alerts: UnrestAlert[];
+}
+
+export const UnrestAlerts = ({ alerts }: UnrestAlertsProps) => {
+  const highPriorityCount = alerts.filter(a => a.probability > 50).length;
 
   return (
     <motion.div
@@ -34,7 +38,7 @@ export const UnrestAlerts = () => {
       </div>
 
       <div className="space-y-4">
-        {unrestAlerts.map((alert, index) => (
+        {alerts.map((alert, index) => (
           <motion.div
             key={alert.id}
             initial={{ opacity: 0, x: -20 }}

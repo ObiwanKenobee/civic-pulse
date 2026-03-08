@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
-import { narratives } from "@/lib/dashboardData";
+import { NarrativeData } from "@/lib/dashboardData";
 import { MessageCircle, Zap, TrendingUp, Users } from "lucide-react";
 
-export const NarrativeIntelligence = () => {
+interface NarrativeIntelligenceProps {
+  narratives: NarrativeData[];
+}
+
+export const NarrativeIntelligence = ({ narratives }: NarrativeIntelligenceProps) => {
   const viralCount = narratives.filter(n => n.velocity === 'viral' || n.velocity === 'fast').length;
 
   return (

@@ -1,13 +1,17 @@
 import { motion } from "framer-motion";
-import { trustMetrics } from "@/lib/dashboardData";
+import { TrustMetric } from "@/lib/dashboardData";
 import { TrendingDown, TrendingUp, Minus, AlertTriangle } from "lucide-react";
 
-export const CivicTrustIndex = () => {
+interface CivicTrustIndexProps {
+  metrics: TrustMetric[];
+}
+
+export const CivicTrustIndex = ({ metrics }: CivicTrustIndexProps) => {
   const averageTrust = Math.round(
-    trustMetrics.reduce((acc, m) => acc + m.percentage, 0) / trustMetrics.length
+    metrics.reduce((acc, m) => acc + m.percentage, 0) / metrics.length
   );
 
-  const fragileInstitutions = trustMetrics.filter(m => m.percentage < 50).length;
+  const fragileInstitutions = metrics.filter(m => m.percentage < 50).length;
 
   return (
     <motion.div
@@ -57,7 +61,7 @@ export const CivicTrustIndex = () => {
 
       {/* Individual Institutions */}
       <div className="space-y-4">
-        {trustMetrics.map((metric, index) => (
+        {metrics.map((metric, index) => (
           <motion.div
             key={metric.institution}
             initial={{ opacity: 0, x: -20 }}

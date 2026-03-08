@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
-import { grievances } from "@/lib/dashboardData";
+import { Grievance } from "@/lib/dashboardData";
 import { TrendingUp, TrendingDown, AlertCircle } from "lucide-react";
 
-export const GrievanceRadar = () => {
+interface GrievanceRadarProps {
+  grievances: Grievance[];
+}
+
+export const GrievanceRadar = ({ grievances }: GrievanceRadarProps) => {
   const totalChange = grievances.reduce((acc, g) => acc + (g.trend === 'up' ? g.changePercent : -g.changePercent), 0);
   const risingGrievances = grievances.filter(g => g.trend === 'up').length;
 

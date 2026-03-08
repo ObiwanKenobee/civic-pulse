@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
-import { regions } from "@/lib/dashboardData";
+import { SentimentRegion } from "@/lib/dashboardData";
 import { Gauge } from "lucide-react";
 
-export const StressIndex = () => {
+interface StressIndexProps {
+  regions: SentimentRegion[];
+}
+
+export const StressIndex = ({ regions }: StressIndexProps) => {
   const sortedRegions = [...regions].sort((a, b) => b.stressIndex - a.stressIndex);
 
   return (
